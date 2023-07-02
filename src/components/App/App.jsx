@@ -4,11 +4,12 @@ import { Component } from 'react';
 import { getData } from '../services/api';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
+import { Loader } from 'components/Loader/Loader';
 
 export class App extends Component {
   state = {
     photosArray: [],
-    isLoading: true,
+    isLoading: false,
     searchTerm: '',
     error: null,
     currentPage: 1,
@@ -17,6 +18,8 @@ export class App extends Component {
   onSubmit = inputValue => {
     this.setState({
       searchTerm: inputValue,
+      photosArray: [],
+      currentPage: 1,
     });
   };
 
@@ -42,7 +45,7 @@ export class App extends Component {
           photosArray:
             this.state.currentPage === 1
               ? response.data.hits
-              : [...prevState.photosArray, response.data.hits],
+              : [...prevState.photosArray, ...response.data.hits],
         }));
       } catch (error) {
         this.setState({ error });
@@ -55,12 +58,13 @@ export class App extends Component {
   async componentDidMount() { }
 
   render() {
-    const { photosArray } = this.state;
+    const { photosArray, isLoading } = this.state;
     // console.log(this.state.photosArray)
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery photosArray={this.state.photosArray} />
+        {isLoading && <Loader />}
         {photosArray.length !== 0 && (
           <Button onLoadMoreClick={this.onLoadMoreClick} />
         )}
