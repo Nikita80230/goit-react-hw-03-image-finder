@@ -5,6 +5,8 @@ import { getData } from '../services/api';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
+import { Modal } from 'components/Modal/Modal';
+import * as basicLightbox from 'basiclightbox';
 
 export class App extends Component {
   state = {
@@ -13,6 +15,7 @@ export class App extends Component {
     searchTerm: '',
     error: null,
     currentPage: 1,
+    modal: { isOpen: false, modalPhoto: '' },
   };
 
   onSubmit = inputValue => {
@@ -26,6 +29,15 @@ export class App extends Component {
   onLoadMoreClick = () => {
     this.setState({
       currentPage: this.state.currentPage + 1,
+    });
+  };
+
+  onOpenModal = img => {
+    this.setState({
+      modal: {
+        isOpen: true,
+        modalPhoto: img,
+      },
     });
   };
 
@@ -58,16 +70,26 @@ export class App extends Component {
   async componentDidMount() { }
 
   render() {
-    const { photosArray, isLoading } = this.state;
+    const { photosArray, isLoading, modal } = this.state;
     // console.log(this.state.photosArray)
+    const instance = basicLightbox.create(`<div>
+                <div>
+                    
+                    img src="${this.state.modal.modalPhoto}" width="800" height="600">
+                </div>
+            </div>`);
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery photosArray={this.state.photosArray} />
+        <ImageGallery
+          photosArray={this.state.photosArray}
+          onOpenModal={this.onOpenModal}
+        />
         {isLoading && <Loader />}
         {photosArray.length !== 0 && (
           <Button onLoadMoreClick={this.onLoadMoreClick} />
         )}
+        {modal.isOpen ? instance.show() : instance.close()}
       </div>
     );
   }

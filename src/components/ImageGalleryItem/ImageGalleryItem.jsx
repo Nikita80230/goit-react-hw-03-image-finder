@@ -1,13 +1,12 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 export class ImageGalleryItem extends Component {
-
     render() {
-        const { webformatURL, largeImageURL } = this.props
+        const { webformatURL, largeImageURL, onClick } = this.props;
         return (
             <li>
-                <img src={webformatURL} alt={largeImageURL} />
+                <img onClick={onClick} src={webformatURL} alt={largeImageURL} />
             </li>
-        )
+        );
     }
 }
