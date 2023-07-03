@@ -33,6 +33,7 @@ export class App extends Component {
   };
 
   onOpenModal = img => {
+    console.log(img)
     this.setState({
       modal: {
         isOpen: true,
@@ -40,6 +41,15 @@ export class App extends Component {
       },
     });
   };
+
+  onCloseModal = () => {
+    this.setState({
+      modal: {
+        isOpen: false,
+        modalPhoto: null,
+      },
+    });
+  }
 
   async componentDidUpdate(prevProps, prevState) {
     if (
@@ -72,12 +82,12 @@ export class App extends Component {
   render() {
     const { photosArray, isLoading, modal } = this.state;
     // console.log(this.state.photosArray)
-    const instance = basicLightbox.create(`<div>
-                <div>
-                    
-                    img src="${this.state.modal.modalPhoto}" width="800" height="600">
-                </div>
-            </div>`);
+    // const instance = basicLightbox.create(`<div>
+    //             <div>
+
+    //                 img src="${this.state.modal.modalPhoto}" width="800" height="600">
+    //             </div>
+    //         </div>`);
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSubmit} />
@@ -89,7 +99,7 @@ export class App extends Component {
         {photosArray.length !== 0 && (
           <Button onLoadMoreClick={this.onLoadMoreClick} />
         )}
-        {modal.isOpen ? instance.show() : instance.close()}
+        {modal.isOpen && <Modal modalPhoto={modal.modalPhoto} onCloseModal={this.onCloseModal} />}
       </div>
     );
   }

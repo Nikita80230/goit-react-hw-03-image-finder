@@ -12,9 +12,7 @@ export class ImageGallery extends Component {
                     photosArray.map(({ id, webformatURL, largeImageURL }) => {
                         return (
                             <ImageGalleryItem
-                                onClick={largeImageURL => {
-                                    this.props.onOpenModal(largeImageURL);
-                                }}
+                                onOpenModal={this.props.onOpenModal}
                                 key={id}
                                 webformatURL={webformatURL}
                                 largeImageURL={largeImageURL}
