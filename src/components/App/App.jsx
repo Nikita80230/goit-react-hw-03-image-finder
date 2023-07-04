@@ -1,7 +1,7 @@
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import css from './App.module.css';
 import { Component } from 'react';
-import { getData } from '../services/api';
+import { getData } from '../../services/api';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
