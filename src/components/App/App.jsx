@@ -6,7 +6,6 @@ import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 import { Modal } from 'components/Modal/Modal';
-import * as basicLightbox from 'basiclightbox';
 
 export class App extends Component {
   state = {
@@ -33,7 +32,7 @@ export class App extends Component {
   };
 
   onOpenModal = img => {
-    console.log(img)
+    console.log(img);
     this.setState({
       modal: {
         isOpen: true,
@@ -49,7 +48,7 @@ export class App extends Component {
         modalPhoto: null,
       },
     });
-  }
+  };
 
   async componentDidUpdate(prevProps, prevState) {
     if (
@@ -99,7 +98,12 @@ export class App extends Component {
         {photosArray.length !== 0 && (
           <Button onLoadMoreClick={this.onLoadMoreClick} />
         )}
-        {modal.isOpen && <Modal modalPhoto={modal.modalPhoto} onCloseModal={this.onCloseModal} />}
+        {modal.isOpen && (
+          <Modal
+            modalPhoto={modal.modalPhoto}
+            onCloseModal={this.onCloseModal}
+          />
+        )}
       </div>
     );
   }

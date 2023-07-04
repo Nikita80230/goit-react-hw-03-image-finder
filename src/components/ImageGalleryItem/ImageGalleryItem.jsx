@@ -7,7 +7,7 @@ export class ImageGalleryItem extends Component {
         console.log(largeImageURL)
         return (
             <li>
-                <img className={css.galleryItemImg} onClick={(largeImageURL) => { this.props.onOpenModal(largeImageURL) }} src={webformatURL} alt={largeImageURL} />
+                <img className={css.galleryItemImg} onClick={() => { this.props.onOpenModal(largeImageURL) }} src={webformatURL} alt={largeImageURL} />
             </li>
         );
     }
