@@ -20,7 +20,8 @@ export class App extends Component {
   onSubmit = inputValue => {
     this.setState(prevState => ({
       searchTerm: inputValue,
-      photosArray: prevState.searchTerm === inputValue ? prevState.photosArray : [],
+      photosArray:
+        prevState.searchTerm === inputValue ? prevState.photosArray : [],
       currentPage: 1,
     }));
   };
