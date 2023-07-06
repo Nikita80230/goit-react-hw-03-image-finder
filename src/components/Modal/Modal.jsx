@@ -9,14 +9,12 @@ export class Modal extends Component {
     };
     handleOverlayClick = event => {
         if (event.currentTarget === event.target) {
-            console.log(event);
             this.props.onCloseModal();
         }
     };
 
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown);
-        // window.addEventListener("click", this.handleOverlayClick)
     }
 
     componentWillUnmount() {
@@ -24,7 +22,6 @@ export class Modal extends Component {
     }
 
     render() {
-        console.log(this.props.modalPhoto);
         return (
             <div className={css.overlay} onClick={this.handleOverlayClick}>
                 <div className={css.modal}>

@@ -18,11 +18,11 @@ export class App extends Component {
   };
 
   onSubmit = inputValue => {
-    this.setState({
+    this.setState(prevState => ({
       searchTerm: inputValue,
-      photosArray: [],
+      photosArray: prevState.searchTerm === inputValue ? prevState.photosArray : [],
       currentPage: 1,
-    });
+    }));
   };
 
   onLoadMoreClick = () => {
@@ -32,7 +32,6 @@ export class App extends Component {
   };
 
   onOpenModal = img => {
-    console.log(img);
     this.setState({
       modal: {
         isOpen: true,

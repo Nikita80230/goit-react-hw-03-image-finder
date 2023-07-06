@@ -4,7 +4,7 @@ import css from "./ImageGalleryItem.module.css"
 export class ImageGalleryItem extends Component {
     render() {
         const { webformatURL, largeImageURL } = this.props;
-        console.log(largeImageURL)
+
         return (
             <li>
                 <img className={css.galleryItemImg} onClick={() => { this.props.onOpenModal(largeImageURL) }} src={webformatURL} alt={largeImageURL} />
